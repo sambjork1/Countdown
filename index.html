@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nedräkningstimer</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; }
+    #countdown { font-size: 24px; color: #333; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>Nedräkningstimer</h1>
+  <p id="countdown"></p>
+
+  <script>
+    // Sätt måldatumet här (format: ÅÅÅÅ-MM-DDTHH:MM:SS)
+    const countdownDate = new Date("2024-12-31T23:59:59").getTime();
+
+    // Uppdatera timern varje sekund
+    const timer = setInterval(function() {
+      const now = new Date().getTime();
+      const distance = countdownDate - now;
+
+      if (distance < 0) {
+        clearInterval(timer);
+        document.getElementById("countdown").innerHTML = "Tiden är ute!";
+      } else {
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
+        + minutes + "m " + seconds + "s ";
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
